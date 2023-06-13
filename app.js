@@ -17,28 +17,40 @@ const inventors = [
   // Array.prototype.filter()
   // 1. Filter the array of inventors into a new array containing only the inventors born in the 1500's
   
-  
+  const oldInventors = inventors.filter((ivnt => ivnt.year >= 1500 && ivnt.year < 1600));
+
+  console.log(oldInventors)
   
   // Array.prototype.map()
   // 2. Map the array of the inventors into a new array containing objects with just the first and last names as properties
   // Hint:  Return a new object literal from the callback (don't mutate the object being passed in to map)
   
-  
+  const inventorNames = inventors.map(inventor => `${inventor.first} ${inventor.last}`);
+
+console.log(inventorNames);
   
   // Array.prototype.sort()
   // 3. Sort the inventors by birth date (year property), in ascending order
   
+  const inventorYear = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
   
+  console.log(inventorYear);
   
   // Array.prototype.find()
   // 4. Find the inventor object with the first name of 'Ada'
   
-  
+  const inventorAda = inventors.find((inv) => inv.first === 'Ada');
+
+  console.log(inventorAda)
   
   // Array.prototype.reduce()
   // 5. How many years did all the inventors live?
   
-  
+  const years = inventors.reduce((total, inventor) => {
+    return total + (inventor.passed - inventor.year);
+  }, 0);
+
+  console.log(years)
   
   
   const people = [
@@ -59,7 +71,12 @@ const inventors = [
   // 6. Map the people array such that the new array consists of strings with the names formatted as "First Last", e.g., "Becker, Carl" should be mapped to "Carl Becker".
   // Hint: As a start, consider using the String.prototype.split method to "split" the string using ', ' as the separator
   
-  
+  const peopleName = people.map(function(personName) {
+    const names = personName.split(", ");
+    return `${names[1]} ${names[0]}`
+  })
+
+  console.log(peopleName)
   
   
   const data = [
@@ -71,6 +88,15 @@ const inventors = [
   // 7. Count the number of instances for each of the data items. The reduce should return an object where the keys are 'car', 'truck', etc. and the values are the count.
   // Hint: Since you want to return an object, be sure to pass an empty {} for the initial value of the "accumulator".
   
+  const motorParts = data.reduce(function(obj, itm){
+    if (!obj[itm]) {
+        obj[itm] = 0;
+      }
+      obj[itm]++;
+      return obj;
+    }, {});
+
+    console.log(motorParts);
   
   
   const devs = [
@@ -83,12 +109,24 @@ const inventors = [
   // Array.prototype.some()
   // 8. Check if at least one person is 19 or older?
   // Hint: To get today's year, use the getFullYear method of new Date(), i.e., new Date().getFullYear()
+ 
   
-  
+
+  const todayYear = new Date().getFullYear()
+  console.log(
+    devs.some(dev => (todayYear - dev.year) >= 19)
+  )
+  console.log(todayYear)
+
+
   // Array.prototype.every()
   // 9. Check if everyone is 19 or older?
   
-  
+  const todayDate = new Date().getFullYear()
+  console.log(
+    devs.some(evr => (todayDate + evr.year) < 19)
+  )
+  console.log(todayDate)
   
   const comments = [
     { text: 'Love this!', id: 523423 },
@@ -101,11 +139,17 @@ const inventors = [
   // Array.prototype.find()
   // 10. Find the comment with the id of 823423
   
-  
-  
+  const commentID = comments.find((cmt) => cmt.id === 823423);
+
+ console.log(commentID)
+
+
   // Array.prototype.findIndex()
   // 11. Find the index of the comment with an id of 123523
+
+  const index = comments.findIndex((indCmt) => indCmt.id === 123523);
   
-  
+
+    console.log(index)
   
   
